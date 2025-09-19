@@ -1,30 +1,17 @@
 Let’s wire this into something you can evolve fast: upload/query → dataframe/table → chart pane with a pluggable renderer registry. I’ll keep it tight and pragmatic.
 
-# Install deps (React + TS + TanStack already in place)
-
-```bash
-# charts + table + csv + schema + mui
-npm i @tanstack/react-table papaparse zod
-npm i chart.js react-chartjs-2
-npm i @mui/material @emotion/react @emotion/styled @mui/icons-material
-# (optional) other libs you plan to try later
-# npm i echarts echarts-for-react plotly.js-dist-min react-plotly.js
-```
 
 # Suggested folder structure
 
 ```
 src/
-  app/
-    queryClient.ts
-    theme.ts
-    chartRegistry.ts
   components/
     DataSourcePanel.tsx
     DataTable.tsx
     ChartPane.tsx
     charts/
       ChartJSRenderer.tsx
+      PlotlyFigureWrapper.tsx
   lib/
     dataframe.ts
     payloads.ts
@@ -606,12 +593,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ---
 
-## Next small enhancements (fast wins)
-
-* Add **schema validation** (zod) for `ChartPayload`.
-* Add **chip selector** to switch active DataFrame when multiple are loaded.
-* Add **“Download CSV”** button (for roundtripping).
-* Add **theme bridge**: MUI palette → chart options (ticks/grid font size, etc.).
-* Add **empty-state samples** for one-click demo.
-
-If you want, I can stub **Plotly** and **ECharts** renderers next so you can A/B library ergonomics with the same payloads.
